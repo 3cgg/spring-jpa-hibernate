@@ -2,8 +2,8 @@ package me.libme.module.spring.jpahibernate.query2;
 
 
 import me.libme.kernel._c._m.JModel;
-import me.libme.module.spring.jpahibernate.meta.JEntityUtilService;
 import me.libme.kernel._c.util.JStringUtils;
+import me.libme.module.spring.jpahibernate.meta.JEntityUtilService;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -493,6 +493,13 @@ public class JCondition implements JModel {
 		public static Condition larger(Object value){
 			Condition condition=new Condition();
 			condition.ope=Ope.LARGER;
+			condition.value=value;
+			return condition;
+		}
+
+		public static Condition in(ArrayList value){
+			Condition condition=new Condition();
+			condition.ope=Ope.IN;
 			condition.value=value;
 			return condition;
 		}
