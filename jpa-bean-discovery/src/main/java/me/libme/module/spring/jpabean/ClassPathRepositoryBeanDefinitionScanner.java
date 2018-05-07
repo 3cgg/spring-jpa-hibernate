@@ -1,6 +1,5 @@
 package me.libme.module.spring.jpabean;
 
-import me.libme.module.spring.jpahibernate.JSpringJpaRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.AnnotatedBeanDefinition;
@@ -10,6 +9,7 @@ import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;
 import org.springframework.context.annotation.ScannedGenericBeanDefinition;
 import org.springframework.core.type.ClassMetadata;
+import org.springframework.stereotype.Repository;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -28,27 +28,35 @@ public class ClassPathRepositoryBeanDefinitionScanner extends ClassPathBeanDefin
         super(registry,true);
         super.addIncludeFilter(
                 (metadataReader,metadataReaderFactory)->{
-                    boolean included=false;
-                    ClassMetadata classMetadata= metadataReader.getClassMetadata();
-                    if(classMetadata.isInterface()){
-                        String indicator=ISingleEntityAccess.class.getName();
-                        String[] interfaceNames=classMetadata.getInterfaceNames();
-                        for(String name : interfaceNames){
-                            if(indicator.equals(name)){
-                                included=true;
-                                break;
-                            }
-                        }
-                    }
-                    return included;
+//                    boolean included=false;
+//                    ClassMetadata classMetadata= metadataReader.getClassMetadata();
+//                    if(classMetadata.isInterface()){
+//                        String indicator=ISingleEntityAccess.class.getName();
+//                        String[] interfaceNames=classMetadata.getInterfaceNames();
+//                        for(String name : interfaceNames){
+//                            if(indicator.equals(name)){
+//                                included=true;
+//                                break;
+//                            }
+//                        }
+//                    }
+//                    return included;
+                    return true;
                 });
 
         super.addExcludeFilter((metadataReader,metadataReaderFactory)->{
             boolean excluded=false;
             ClassMetadata classMetadata= metadataReader.getClassMetadata();
 
-            if(JSpringJpaRepository.class.getName().equals(classMetadata.getClassName())){
-                excluded=true;
+            try {
+                Class clazz=Class.forName(classMetadata.getClassName());
+                if(!ISingleEntityAccess.class.isAssignableFrom(clazz)
+                        ||clazz.getAnnotation(Repository.class)==null){
+                    //我们在这里仅仅找自己的Repo接口
+                    excluded=true;
+                }
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
             }
 
             return excluded;
