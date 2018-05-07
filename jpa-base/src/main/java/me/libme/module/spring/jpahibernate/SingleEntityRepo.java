@@ -1,6 +1,6 @@
 package me.libme.module.spring.jpahibernate;
 
-import me.libme.module.spring.jpahibernate._m.JBaseModel;
+import me.libme.module.spring.jpahibernate._m.IEntityModel;
 
 import java.io.Serializable;
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.List;
  * @param <M>
  * @param <ID>
  */
-public interface SingleEntityRepo<M extends JBaseModel,ID extends Serializable> {
+public interface SingleEntityRepo<M extends IEntityModel,ID extends Serializable> {
 	
 	public void saveModel(M baseModel); 
 	

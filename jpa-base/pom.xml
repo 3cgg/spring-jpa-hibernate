@@ -12,9 +12,8 @@
     </parent>
 
     <groupId>libme.modules</groupId>
-    <artifactId>spring-jpa-hibernate-integrater</artifactId>
+    <artifactId>spring-jpa-hibernate</artifactId>
     <version>1.0.1</version>
-    <packaging>pom</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -23,17 +22,41 @@
 
     <dependencies>
 
+        <dependency>
+            <groupId>libme</groupId>
+            <artifactId>lib-kernel</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/javax.validation/validation-api -->
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-validator -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
-	
-	
-	
-    <modules>
-        <module>jpa-base</module>
-        <module>jpa-bean-discovery</module>
-
-
-    </modules>
-
 
 
 

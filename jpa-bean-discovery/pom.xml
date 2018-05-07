@@ -12,9 +12,8 @@
     </parent>
 
     <groupId>libme.modules</groupId>
-    <artifactId>spring-jpa-hibernate-integrater</artifactId>
+    <artifactId>spring-jpa-bean-discovery</artifactId>
     <version>1.0.1</version>
-    <packaging>pom</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -23,17 +22,32 @@
 
     <dependencies>
 
+        <dependency>
+            <groupId>libme.modules</groupId>
+            <artifactId>spring-jpa-hibernate</artifactId>
+            <version>1.0.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot</artifactId>-->
+        <!--</dependency>-->
+
+
+
     </dependencies>
-	
-	
-	
-    <modules>
-        <module>jpa-base</module>
-        <module>jpa-bean-discovery</module>
-
-
-    </modules>
-
 
 
 

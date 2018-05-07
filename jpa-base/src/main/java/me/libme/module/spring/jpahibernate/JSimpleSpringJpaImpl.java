@@ -1,13 +1,13 @@
 package me.libme.module.spring.jpahibernate;
 
-import me.libme.module.spring.jpahibernate._m.JBaseModel;
+import me.libme.module.spring.jpahibernate._m.IEntityModel;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 
 import javax.persistence.EntityManager;
 import java.io.Serializable;
 import java.util.List;
 
-public class JSimpleSpringJpaImpl<T extends JBaseModel, ID extends Serializable>
+public class JSimpleSpringJpaImpl<T extends IEntityModel, ID extends Serializable>
 	extends SimpleJpaRepository<T, ID> implements JSpringJpaRepository<T, ID> {
 
     private EntityManager em;

@@ -1,6 +1,5 @@
 package me.libme.module.spring.jpahibernate._m;
 
-import me.libme.kernel._c._m.JModel;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -14,7 +13,7 @@ import java.util.Date;
  */
 @SuppressWarnings("serial")
 @MappedSuperclass
-public abstract class JBaseModel implements JModel {
+public abstract class JBaseModel implements IEntityModel {
 
 	/**
 	 * the primary key , uuid 
@@ -64,58 +63,72 @@ public abstract class JBaseModel implements JModel {
 	@Column(name = "version")
 	private int version;
 
+	@Override
 	public String getId() {
 		return id;
 	}
 
+	@Override
 	public void setId(String id) {
 		this.id = id;
 	}
 
+	@Override
 	public String getCreateId() {
 		return createId;
 	}
 
+	@Override
 	public void setCreateId(String createId) {
 		this.createId = createId;
 	}
 
+	@Override
 	public String getUpdateId() {
 		return updateId;
 	}
 
+	@Override
 	public void setUpdateId(String updateId) {
 		this.updateId = updateId;
 	}
 
+	@Override
 	public Date getCreateTime() {
 		return createTime;
 	}
 
+	@Override
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
 
+	@Override
 	public Date getUpdateTime() {
 		return updateTime;
 	}
 
+	@Override
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
 	}
 
+	@Override
 	public String getDeleted() {
 		return deleted;
 	}
 
+	@Override
 	public void setDeleted(String deleted) {
 		this.deleted = deleted;
 	}
 
+	@Override
 	public int getVersion() {
 		return version;
 	}
 
+	@Override
 	public void setVersion(Integer version) {
 		this.version = version;
 	}
