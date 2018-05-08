@@ -139,7 +139,7 @@ public class JCondition implements JModel {
 		return allParams;
 	}
 	
-	public String toSliceClause(JSingleEntityQueryMeta.SqlType sqlType){
+	public String toSliceClause(SqlType sqlType){
 		StringBuffer stringBuffer=new StringBuffer("");
 		String prefix= LinkType.ROOT==linkType?"":linkType.name();
 		for(ConditionSlice conditionSlice:conditionSliceClauses){
@@ -154,7 +154,7 @@ public class JCondition implements JModel {
 	 * include this condition
 	 * @return
 	 */
-	private String toPreWholeClause(JSingleEntityQueryMeta.SqlType sqlType){
+	private String toPreWholeClause(SqlType sqlType){
 		if(pre==null){
 			return toSliceClause(sqlType);
 		}
@@ -168,7 +168,7 @@ public class JCondition implements JModel {
 	 * @param thisCondition
 	 * @return
 	 */
-	private String toNextWholeClause(JCondition thisCondition,JSingleEntityQueryMeta.SqlType sqlType){
+	private String toNextWholeClause(JCondition thisCondition,SqlType sqlType){
 		if(next==null){
 			if(this!=thisCondition){
 				return toSliceClause(sqlType);
@@ -186,10 +186,10 @@ public class JCondition implements JModel {
 	}
 	
 	public String toWhereClause(){
-		return toWhereClause(JSingleEntityQueryMeta.SqlType.JPQL);
+		return toWhereClause(SqlType.JPQL);
 	}
 	
-	public String toWhereClause(JSingleEntityQueryMeta.SqlType sqlType){
+	public String toWhereClause(SqlType sqlType){
 		return " where "+toPreWholeClause(sqlType)+toNextWholeClause(this,sqlType);
 	}
 	
@@ -266,7 +266,7 @@ public class JCondition implements JModel {
 		conditionSlice.opeType=opeType;
 		conditionSlice.paramString=paramString;
 		conditionSliceClauses.add(conditionSlice);
-//		conditionSliceClauses.add(linkTypeName+" "+JSingleEntityQueryMeta.ALIAS+"."+property+opeType+" :"+paramString);
+//		conditionSliceClauses.add(linkTypeName+" "+ALIAS+"."+property+opeType+" :"+paramString);
 		
 		if(opeType!= Ope.IS){
 			params.put(paramString, opeType.wrapValue(value));
@@ -275,10 +275,10 @@ public class JCondition implements JModel {
 		return this;
 	}
 	
-	private String _conditionSlice(ConditionSlice conditionSlice,JSingleEntityQueryMeta.SqlType sqlType){
+	private String _conditionSlice(ConditionSlice conditionSlice,SqlType sqlType){
 		return conditionSlice.linkTypeName
-				+" "+JSingleEntityQueryMeta.ALIAS+"."
-				+(JSingleEntityQueryMeta.SqlType.JPQL==sqlType? conditionSlice.propertyName :conditionSlice.columnName)
+				+" "+_Cons.ALIAS+"."
+				+(SqlType.JPQL==sqlType? conditionSlice.propertyName :conditionSlice.columnName)
 				+( conditionSlice.opeType== Ope.IS?
 						( " is null " ) :(" "+conditionSlice.opeType.getInstruct()+" :"+conditionSlice.paramString)
 						);
@@ -344,18 +344,28 @@ public class JCondition implements JModel {
 		return this;
 	}
 	
-	public JCondition primary(Object value,LinkType... linkType){
-		append("id", value, Ope.EQUAL,linkType);
-		return this;
-	}
-	
+//	public JCondition primary(Object value,LinkType... linkType){
+//		append("id", value, Ope.EQUAL,linkType);
+//		return this;
+//	}
+//
+//	public JCondition deleted(Object value,LinkType... linkType){
+//		append("deleted", value, Ope.EQUAL,linkType);
+//		return this;
+//	}
+//
+//	public JCondition noDeleted(LinkType... linkType){
+//		append("deleted", "N", Ope.EQUAL,linkType);
+//		return this;
+//	}
+
 	public JCondition in(String property,List value,LinkType... linkType){
 		append(property, value, Ope.IN,linkType);
 		return this;
 	}
 	
 	/**
-	 * linkTypeName+" "+JSingleEntityQueryMeta.ALIAS+"."+property+opeType+" :"+paramString
+	 * linkTypeName+" "+ALIAS+"."+property+opeType+" :"+paramString
 	 * @author JIAZJ
 	 *
 	 */

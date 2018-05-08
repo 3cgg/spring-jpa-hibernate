@@ -16,6 +16,10 @@ public class JEntityModelMeta implements JModel {
 	private String tableName;
 	
 	private String schema;
+
+	private JEntityColumnMeta primaryColumn;
+
+	private JEntityColumnMeta deleteColumn;
 	
 	public JEntityModelMeta(Class<?> entityClass) {
 		this.entityClass=entityClass;
@@ -48,7 +52,20 @@ public class JEntityModelMeta implements JModel {
 	void setSchema(String schema) {
 		this.schema = schema;
 	}
-	
-	
-	
+
+	public JEntityColumnMeta getPrimaryColumn() {
+		return primaryColumn;
+	}
+
+	void setPrimaryColumn(JEntityColumnMeta primaryColumn) {
+		this.primaryColumn = primaryColumn;
+	}
+
+	public JEntityColumnMeta getDeleteColumn() {
+		return deleteColumn;
+	}
+
+	void setDeleteColumn(JEntityColumnMeta deleteColumn) {
+		this.deleteColumn = deleteColumn;
+	}
 }

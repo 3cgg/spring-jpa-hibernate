@@ -1,5 +1,6 @@
 package me.libme.module.spring.jpahibernate._m;
 
+import me.libme.module.spring.jpahibernate.Delete;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -54,6 +55,7 @@ public abstract class JBaseModel implements IEntityModel {
 	 * marks whether the record is deleted. Value is Y|N
 	 */
 	@Column(name="deleted",length=1)
+	@Delete
 	private String deleted;
 	
 	/**

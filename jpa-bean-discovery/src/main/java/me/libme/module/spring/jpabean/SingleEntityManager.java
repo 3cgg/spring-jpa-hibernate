@@ -7,7 +7,7 @@ import me.libme.module.spring.jpahibernate.SingleEntityRepo;
 import me.libme.module.spring.jpahibernate._m.IEntityModel;
 import me.libme.module.spring.jpahibernate.meta.JEntityUtilService;
 import me.libme.module.spring.jpahibernate.query2.JSingleEntityQuery;
-import me.libme.module.spring.jpahibernate.query2.JSingleEntityQueryMeta;
+import me.libme.module.spring.jpahibernate.query2.SqlType;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -106,8 +106,7 @@ public class SingleEntityManager<T extends IEntityModel> implements ISingleEntit
 		if(entityClass==targetClass){
 			return (M) getById(id);
 		}
-		return singleEntityQuery2().condition()
-				.primary(id).ready().model();
+		return singleEntityQuery2().id(id).ready().model();
 	}
 
 	/**
@@ -272,7 +271,7 @@ public class SingleEntityManager<T extends IEntityModel> implements ISingleEntit
 		return JEntityUtilService.get().selectCause(entityClass, alias);
 	}
 	
-	public String selectCause(JSingleEntityQueryMeta.SqlType sqlType, String... alias){
+	public String selectCause(SqlType sqlType, String... alias){
 		return JEntityUtilService.get().selectCause(sqlType,entityClass, alias);
 	}
 

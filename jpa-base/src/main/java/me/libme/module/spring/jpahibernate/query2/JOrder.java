@@ -2,10 +2,8 @@ package me.libme.module.spring.jpahibernate.query2;
 
 
 import me.libme.kernel._c._m.JModel;
-import me.libme.module.spring.jpahibernate.meta.JEntityUtilService;
 import me.libme.kernel._c.util.JStringUtils;
-
-import static me.libme.module.spring.jpahibernate.query2.JSingleEntityQueryMeta.SqlType;
+import me.libme.module.spring.jpahibernate.meta.JEntityUtilService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +36,7 @@ public class JOrder implements JModel {
 		StringBuffer stringBuffer=new StringBuffer("");
 		String prefix=",";
 		for(OrderSlice orderSlice:orderClause){
-			String clause=JSingleEntityQueryMeta.ALIAS+"."
+			String clause=_Cons.ALIAS+"."
 						+(SqlType.JPQL==sqlType? orderSlice.propertyName:orderSlice.columnName)
 						+" " + orderSlice.orderType;
 			stringBuffer.append(prefix);

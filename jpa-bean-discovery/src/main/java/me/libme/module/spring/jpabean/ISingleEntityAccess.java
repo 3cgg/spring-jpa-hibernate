@@ -3,7 +3,7 @@ package me.libme.module.spring.jpabean;
 import me.libme.module.spring.jpahibernate.SingleEntityRepo;
 import me.libme.module.spring.jpahibernate._m.IEntityModel;
 import me.libme.module.spring.jpahibernate.query2.JSingleEntityQuery;
-import me.libme.module.spring.jpahibernate.query2.JSingleEntityQueryMeta;
+import me.libme.module.spring.jpahibernate.query2.SqlType;
 
 import java.io.Serializable;
 import java.util.List;
@@ -17,7 +17,7 @@ public interface ISingleEntityAccess<T extends IEntityModel,ID extends Serializa
 
 	String selectCause(String... alias);
 
-	String selectCause(JSingleEntityQueryMeta.SqlType sqlType, String... alias);
+	String selectCause(SqlType sqlType, String... alias);
 
 	void saveOnly(T object);
 
