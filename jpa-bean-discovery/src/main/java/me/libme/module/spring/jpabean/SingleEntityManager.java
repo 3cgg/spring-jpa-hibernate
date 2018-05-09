@@ -88,7 +88,7 @@ public class SingleEntityManager<T extends IEntityModel> implements ISingleEntit
 	@Override
 	public void delete( String id,Class<?>... entryClass) {
 		T abstractEntity= getRepo().getModel(id, entryClass);
-		abstractEntity.setDeleted("Y");
+		entityOnDeleteListener.onDelete(abstractEntity,sessionUserFactory.sessionUser());
 		updateOnly(abstractEntity);
 	}
 

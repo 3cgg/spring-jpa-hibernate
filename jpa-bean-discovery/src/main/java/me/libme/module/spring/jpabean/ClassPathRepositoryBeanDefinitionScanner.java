@@ -49,7 +49,7 @@ public class ClassPathRepositoryBeanDefinitionScanner extends ClassPathBeanDefin
             ClassMetadata classMetadata= metadataReader.getClassMetadata();
 
             try {
-                Class clazz=Class.forName(classMetadata.getClassName());
+                Class clazz=Thread.currentThread().getContextClassLoader().loadClass(classMetadata.getClassName());
                 if(!ISingleEntityAccess.class.isAssignableFrom(clazz)
                         ||clazz.getAnnotation(Repository.class)==null){
                     //我们在这里仅仅找自己的Repo接口
@@ -77,7 +77,7 @@ public class ClassPathRepositoryBeanDefinitionScanner extends ClassPathBeanDefin
 
             ScannedGenericBeanDefinition scannedGenericBeanDefinition=(ScannedGenericBeanDefinition) beanDefinition;
             String className=scannedGenericBeanDefinition.getMetadata().getClassName();
-            ClassLoader classLoader=scannedGenericBeanDefinition.getClass().getClassLoader();
+            ClassLoader classLoader=Thread.currentThread().getContextClassLoader();
 
             Class entityClass=null;
             Class clazz=null;
@@ -101,10 +101,15 @@ public class ClassPathRepositoryBeanDefinitionScanner extends ClassPathBeanDefin
                 LOGGER.info("can not find any entity , check whether the repo is abstract or not? : "+className);
             }else {
 
-                ((ScannedGenericBeanDefinition) beanDefinition).setBeanClass(SingleEntityManagerFactoryBean.class);
+                ((ScannedGenericBeanDefinition) beanDefinition)
+                    .setBeanClass(SingleEntityManagerFactoryBean.class);
                 beanDefinition.setLazyInit(true);
-                beanDefinition.getPropertyValues().add("clazz", clazz);
-                beanDefinition.getPropertyValues().add("entityClass", entityClass);
+                beanDefinition.getConstructorArgumentValues()
+                        .addIndexedArgumentValue(0,clazz);
+                beanDefinition.getConstructorArgumentValues()
+                        .addIndexedArgumentValue(1,entityClass);
+//                beanDefinition.getPropertyValues().add("clazz", clazz);
+//                beanDefinition.getPropertyValues().add("entityClass", entityClass);
 
 
                 LOGGER.info("----append new bean definition : " + className);

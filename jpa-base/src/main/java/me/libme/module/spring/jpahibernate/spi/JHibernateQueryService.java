@@ -36,12 +36,11 @@ implements JSPIQueryService
 		if(JStringUtils.isNotNullOrEmpty(_query.getResultSetMapping())){
 			return genericQueryService.getSingleResult(query, _query);
 		}
-		HibernateQuery hibernateQuery=(HibernateQuery) query;
-		org.hibernate.Query hQuery=hibernateQuery.getHibernateQuery();
+		org.hibernate.Query hQuery=hibernateQuery(query);
 		hQuery.setResultTransformer(getResultTransformer(_query));
 		List<?> list=hQuery.list();
 		if(!list.isEmpty()&&list.size()>1){
-			throw new RuntimeException("more than one record is searched");
+			throw new RuntimeException("more than one record be found.");
 		}
 		T result= list.isEmpty()?null:(T)(list.get(0));
 		_query.detach(result);
@@ -53,10 +52,20 @@ implements JSPIQueryService
 		if(JStringUtils.isNotNullOrEmpty(_query.getResultSetMapping())){
 			return genericQueryService.getResultList(query, _query);
 		}
-		HibernateQuery hibernateQuery=(HibernateQuery) query;
-		org.hibernate.Query hQuery=hibernateQuery.getHibernateQuery();
+		org.hibernate.Query hQuery=hibernateQuery(query);
 		hQuery.setResultTransformer(getResultTransformer(_query));
 		return hQuery.list();
+	}
+
+	private org.hibernate.Query hibernateQuery(Query query){
+		org.hibernate.Query hQuery=null;
+		if(query instanceof HibernateQuery){
+			HibernateQuery hibernateQuery=(HibernateQuery) query;
+			hQuery=hibernateQuery.getHibernateQuery();
+		}else{
+			hQuery=(org.hibernate.Query) query;
+		}
+		return hQuery;
 	}
 	
 	@Override

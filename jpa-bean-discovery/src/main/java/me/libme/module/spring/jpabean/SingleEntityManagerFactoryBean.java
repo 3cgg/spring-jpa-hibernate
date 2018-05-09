@@ -2,12 +2,12 @@ package me.libme.module.spring.jpabean;
 
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.proxy.InvocationHandler;
-import org.springframework.cglib.proxy.Proxy;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
+import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 
 /**
  * Created by J on 2017/10/14.
@@ -21,9 +21,14 @@ public class SingleEntityManagerFactoryBean implements FactoryBean<Object>,Appli
         this.applicationContext = applicationContext;
     }
 
-    private Class entityClass;
+    private final Class<?> clazz;
 
-    private Class<?> clazz;
+    private final Class entityClass;
+
+    public SingleEntityManagerFactoryBean(Class<?> clazz, Class entityClass) {
+        this.clazz = clazz;
+        this.entityClass = entityClass;
+    }
 
     private EntityManagerDiscovery entityManagerDiscovery;
 
@@ -92,7 +97,7 @@ public class SingleEntityManagerFactoryBean implements FactoryBean<Object>,Appli
         singleEntityManager.setEntityOnDeleteListener(entityOnDeleteListener);
 
         SingleRepoProxy singleRepoProxy=new SingleRepoProxy(singleEntityManager);
-        Object object=Proxy.newProxyInstance(clazz.getClassLoader(),new Class[]{clazz},singleRepoProxy);
+        Object object= Proxy.newProxyInstance(clazz.getClassLoader(),new Class[]{clazz},singleRepoProxy);
         return object;
     }
 
@@ -106,12 +111,4 @@ public class SingleEntityManagerFactoryBean implements FactoryBean<Object>,Appli
         return true;
     }
 
-
-    public void setClazz(Class<?> clazz) {
-        this.clazz = clazz;
-    }
-
-    public void setEntityClass(Class entityClass) {
-        this.entityClass = entityClass;
-    }
 }
