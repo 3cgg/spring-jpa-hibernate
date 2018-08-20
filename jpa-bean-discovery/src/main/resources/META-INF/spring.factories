@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+me.libme.module.spring.jpabean.SingleEntityRepositoryRegistry,\
+me.libme.module.spring.jpabean.HibernateCPPAutoConfiguration
