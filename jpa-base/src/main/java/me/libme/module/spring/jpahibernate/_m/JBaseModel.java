@@ -1,7 +1,6 @@
 package me.libme.module.spring.jpahibernate._m;
 
 import me.libme.module.spring.jpahibernate.Delete;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -20,8 +19,8 @@ public abstract class JBaseModel implements IEntityModel {
 	 * the primary key , uuid 
 	 */
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO, generator = "uuid")
-	@GenericGenerator(name="uuid", strategy="uuid2")
+//	@GeneratedValue(strategy=GenerationType.AUTO, generator = "uuid")
+//	@GenericGenerator(name="uuid", strategy="uuid2")
 	@Column(name = "id", length = 36)
 	private String id;
 	
