@@ -8,11 +8,11 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.5.3.RELEASE</version>
+        <version>2.0.3.RELEASE</version>
     </parent>
 
     <groupId>libme.modules</groupId>
-    <artifactId>spring-jpa-hibernate-integrater</artifactId>
+    <artifactId>cpp-spring-jpa-hibernate-integrater</artifactId>
     <version>1.0.1</version>
     <packaging>pom</packaging>
 
@@ -21,9 +21,15 @@
     </properties>
 
 
-    <dependencies>
-
-    </dependencies>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>libme</groupId>
+                <artifactId>lib-kernel</artifactId>
+                <version>1.0.2</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 	
 	
 	

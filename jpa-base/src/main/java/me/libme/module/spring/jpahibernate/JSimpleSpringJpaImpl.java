@@ -57,7 +57,7 @@ public class JSimpleSpringJpaImpl<T extends IEntityModel, ID extends Serializabl
 
 	@Override
 	public void saveAllModels(Iterable<T> objects, Class<?>... entryClass) {
-		save(objects);
+		saveAll(objects);
 	}
 
 

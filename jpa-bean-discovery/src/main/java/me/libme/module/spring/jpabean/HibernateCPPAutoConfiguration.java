@@ -31,21 +31,18 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
 
-@org.springframework.context.annotation.Configuration
 @ConditionalOnClass({ HibernateJpaAutoConfiguration.class })
 @ConditionalOnProperty(prefix = "cpp.jpa",name = "bean-discovery",havingValue ="true")
 @AutoConfigureAfter(HibernateJpaAutoConfiguration.class)
-@Component(HibernateCPPAutoConfiguration.BEAN_NAME)
-public class HibernateCPPAutoConfiguration {
+public class HibernateCppAutoConfiguration {
 
-    public static final String BEAN_NAME="HibernateCPPAutoConfiguration";
+    public static final String BEAN_NAME="HibernateCppAutoConfiguration";
 
-    private final Logger LOGGER= LoggerFactory.getLogger(HibernateCPPAutoConfiguration.class);
+    private final Logger LOGGER= LoggerFactory.getLogger(HibernateCppAutoConfiguration.class);
 
 
-    public HibernateCPPAutoConfiguration() {
+    public HibernateCppAutoConfiguration() {
         LOGGER.info("----autoconfig----"+HibernateJpaAutoConfiguration.class);
     }
 

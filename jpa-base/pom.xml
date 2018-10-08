@@ -6,13 +6,13 @@
 
 
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.5.3.RELEASE</version>
+        <groupId>libme.modules</groupId>
+        <artifactId>cpp-spring-jpa-hibernate-integrater</artifactId>
+        <version>1.0.1</version>
     </parent>
 
     <groupId>libme.modules</groupId>
-    <artifactId>spring-jpa-hibernate</artifactId>
+    <artifactId>cpp-spring-jpa-hibernate</artifactId>
     <version>1.0.1</version>
 
     <properties>
@@ -25,7 +25,6 @@
         <dependency>
             <groupId>libme</groupId>
             <artifactId>lib-kernel</artifactId>
-            <version>1.0.2</version>
         </dependency>
 
         <dependency>
@@ -45,10 +44,10 @@
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-validator -->
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-validator</artifactId>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.hibernate</groupId>-->
+            <!--<artifactId>hibernate-validator</artifactId>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -58,54 +57,5 @@
 
     </dependencies>
 
-
-
-    <build>
-
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <encoding>UTF8</encoding>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <version>2.4</version>
-
-                <!-- 进行package命令时就可以将源码同时进行打包 -->
-                <!-- 所以我们需要绑定source插件到我们default生命周期的package阶段 -->
-                <executions>
-                    <execution>
-                        <!-- 定义一个阶段，这个阶段是package -->
-                        <phase>package</phase>
-                        <goals>
-                            <goal>jar-no-fork</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-        </plugins>
-    </build>
-
-    <distributionManagement>
-        <repository>
-            <id>nexus-3cgg-release</id>
-            <name>Nexus 3cgg</name>
-            <url>http://localhost:8081/repository/maven-releases/</url>
-        </repository>
-        <snapshotRepository>
-            <id>nexus-3cgg-snapshots</id>
-            <name>Nexus 3cgg</name>
-            <url>http://localhost:8081/repository/maven-snapshots/</url>
-        </snapshotRepository>
-    </distributionManagement>
 
 </project>
